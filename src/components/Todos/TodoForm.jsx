@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './TodoForm.module.css';
-console.log(styles);
+import Button from '../UI/Button';
 
 export default function TodoForm(props) {
   const { addTodo } = props;
@@ -25,7 +25,9 @@ export default function TodoForm(props) {
             }}
           />
         </label>
-        <button type="submit">Submit</button>
+        <Button type="submit" title="Submit">
+          Submit
+        </Button>
       </form>
     </div>
   );

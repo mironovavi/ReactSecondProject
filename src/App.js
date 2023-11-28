@@ -33,16 +33,42 @@ function App() {
     );
   }
 
+  function resetTodoHandler() {
+    setTodo([]);
+  }
+
+  function resetCompletedTodoHandler() {
+    setTodo(todo.filter((item) => !item.isCompleted));
+  }
+
+  const countCompletedTodo = todo.filter((item) => item.isCompleted).length;
+
   return (
     <div className="App">
       <h1>Todo App</h1>
+
       <TodoForm addTodo={handleChange} />
+      {todo.length > 0 && (
+        <TodoActions
+          completedTodoExist={!!countCompletedTodo}
+          resetTodo={resetTodoHandler}
+          resetCompletedTodo={resetCompletedTodoHandler}
+        />
+      )}
+
       <TodoList
         todo={todo}
         deleteTodo={deleteTodoHandler}
         toggleTodo={toggleTodo}
       />
-      <TodoActions />
+
+      {countCompletedTodo > 0 && (
+        <h2>
+          {`You have completed ${countCompletedTodo} ${
+            countCompletedTodo > 1 ? 'tasks' : 'task'
+          }`}
+        </h2>
+      )}
     </div>
   );
 }
